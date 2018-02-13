@@ -1,0 +1,4 @@
+/* Estilos CSS de la Aplicación */
+
+hr.separador-min{margin:0 0 10px 0 !important;}
+a.text-danger{font-weight:500 !important; color:#77269F !important; margin: 10px 0px; display: block; cursor:pointer;}
