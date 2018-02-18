@@ -15,4 +15,20 @@ class Product extends Model
     protected $fillable = ['name','description','long_description','price','category_id'];
 
     protected $guarded = [];
+
+    /* Relacion entre modelos */
+
+    // $product->category
+
+    public function category(){
+
+    	return $this->belongsTo(Category::class);
+    }
+
+    // $product->images
+
+    public function images(){
+
+    	return $this->hasMany(ProductImage::class);
+    }
 }
