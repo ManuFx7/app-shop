@@ -51,7 +51,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
+                                        <li>
+                                    @if(Auth::user()->admin)
+                                
+                                        <a href="{{ url('admin/products')}}"> Gestionar Productos </a>
+                                   
+                                    @endif
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
