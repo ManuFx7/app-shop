@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Http\Requests\ProductCreateRequest;
 
 class ProductController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
 	/* Listado de Productos */
     public function index(){
     $products = Product::paginate(10);
@@ -21,7 +28,7 @@ class ProductController extends Controller
     }
 
     /* Registrar Producto */
-    public function store(Request $request){
+    public function store(ProductCreateRequest $request){
 
      //dd($request->all());
 
@@ -37,17 +44,16 @@ class ProductController extends Controller
     }
 
      /* Mostrar formulario Edición */
-    public function edit(){
+    public function edit($id){
 
-    return view('admin.products.edit');
+    $product = Product::findOrFail($id);
+    return view('admin.products.edit',['product' => $product]);
     }
 
     /* Actualizar Producto */
-    public function update(Request $request){
+    public function update(ProductCreateRequest $request,$id){
 
-     //dd($request->all());
-
-    $product = new Product();
+    $product = Product::findOrFail($id);
     $product->name = $request->input('name');
     $product->description = $request->input('description');
     $product->price = $request->input('price');
@@ -56,5 +62,16 @@ class ProductController extends Controller
 
     return redirect('/admin/products');
     	
+    }
+
+    /* Borrado Producto */
+
+    public function destroy(Request $request, $id){
+
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return back();
+
     }
 }

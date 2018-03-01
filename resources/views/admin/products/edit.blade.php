@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Creación de Productos')
+@section('title', 'Edición de Productos')
 
 @section('body-class', 'landing-page')
 
@@ -9,7 +9,7 @@
           <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1 class="title">Creación de Productos</h1>
+                        <h1 class="title">Edición de Productos</h1>
                         <a href="{{ url('/admin/products')}}" class="btn btn-primary btn-round"> Atras </a>
                  </div>
                 </div>
@@ -21,42 +21,47 @@
              <div class="section">
             
              <!-- Formulario -->
+
+     <!-- Mostrador de Errores --> 
+
      @if($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-          @foreach($errors->all() as $error)
-             <li>{{ $error }} </li>
-          @endforeach
-        </ul>
-      </div>
+     <div class="alert alert-danger">
+      <ul>
+        @foreach($errors->all() as $error)
+        <li> {{ $error }} </li>
+        @endforeach
+      </ul>
+     </div>
      @endif
 
-     <form method="POST" action="{{ url('admin/products')}}">
+     <!-- Fin de Mostrado de Errores -->
+
+     <form method="POST" action="{{ url('admin/products/'.$product->id.'/update')}}">
               {{ csrf_field() }}
-        
+             {{ method_field('PUT')}}
          <div class="col-md-6 col-lg-6">
           <div class="form-group">
-             <label for="exampleInput1">Introduzca nombre producto</label>
-             <input type="text" value="{{ old('name') }}" class="form-control" name="name" id="name">
+             <label for="exampleInput1">Nombre producto actual </label>
+             <input type="text" class="form-control" name="name" id="name" value="{{ $product->name, old('name')  }}">
           </div>
           </div>
 
            <div class="col-md-6 col-lg-6">
            <div class="form-group">
              <label for="exampleInput2" class="bmd-label-floating">Introduzca descripcion corta producto</label>
-             <input required type="text" value="{{ old('description') }}" class="form-control" name="description" id="description">
+             <input type="text" class="form-control" step="0.01" name="description" id="description" value="{{ $product->description, old('description') }}">
           </div></div>
 
           <div class="col-md-12 col-lg-12">
            <div class="form-group">
              <label for="exampleInput3" class="bmd-label-floating">Introduzca precio del producto</label>
-             <input required type="text"  value="{{ old('price') }}" class="form-control" name="price" id="price">
+             <input type="number" class="form-control" name="price" id="price" value="{{ $product->price, old('price') }}">
           </div>
           </div>
         </div>
            <div class="col-md-12 col-lg-12">
 
-          <textarea class="form-control" placeholder="Descripcion extensa del producto" rows="5" name="long_description"> {{ old('long_description') }}</textarea>
+          <textarea class="form-control" placeholder="Descripcion extensa del producto" rows="5" name="long_description">{{ $product->long_description }}</textarea>
 
 
           </div>

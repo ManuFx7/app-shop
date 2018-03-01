@@ -21,6 +21,7 @@ Route::get('/admin/products','ProductController@index'); //Listado de Productos
 Route::get('/admin/products/create','ProductController@create'); //Show Creación Productos
 Route::post('/admin/products','ProductController@store'); //Crear Producto
 Route::get('/admin/products/{id}/edit','ProductController@edit'); //Muestra Formulario Edicion
-Route::post('/admin/products/{id}/update','ProductController@update'); //Actualizo producto
+Route::put('/admin/products/{id}/update','ProductController@update'); //Actualizo producto
+Route::delete('/admin/products/{id}/delete','ProductController@destroy'); //Borrado
 
 /* Route::resource('almacen/articulo','ArticuloController'); */

@@ -45,15 +45,18 @@
             <td>{{ $product->price }} &euro; </td>
             <td>{{ $product->category ? $product->category->name : 'General' }} </td>
              <td class="td-actions text-right">
-                <button type="button" title="Ver Producto" rel="tooltip" class="btn btn-info btn-simple">
+                <form method="post" action="{{ url('admin/products/'.$product->id.'/delete') }}">
+                {{csrf_field()}} {{method_field('DELETE')}}
+                  <button type="button" title="Ver Producto" rel="tooltip" class="btn btn-info btn-simple">
                     <i class="material-icons">info</i>
                 </button>
-                <button type="button" title="Editar Producto" rel="tooltip" class="btn btn-success btn-simple">
+                <a href="{{ url('admin/products/'.$product->id.'/edit') }}" type="button" title="Editar Producto" rel="tooltip" class="btn btn-success btn-simple">
                     <i class="material-icons">edit</i>
-                </button>
-                <button type="button" title="Eliminar Producto" rel="tooltip" class="btn btn-danger btn-simple">
+                </a>
+                <button type="submit" title="Eliminar Producto" rel="tooltip" class="btn btn-danger btn-simple">
                     <i class="material-icons">close</i>
                 </button>
+                </form>
             </td>
         </tr>
 
